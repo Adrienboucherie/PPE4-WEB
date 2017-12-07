@@ -24,7 +24,7 @@ class pageBase {
 		$this->description = 'MARCHER pour une bonne action';
 		$this->motsCles = 'marche, trail, association, caritative, equipe, coureur';
 		$this->entete = '<div class="page-header">
-       <h1><a href="index.php"><img src="./Image/Trail4_xs.jpg" alt="photos de 4 coureurs"></a> Terra Human TRAIL : marcher pour une bonne action !</h1>  
+       <h1><a href="index.php"><img src="./Image/logo.png" alt="Logo de StarsUp"></a>   Stars\'Up, regardez la note de votre hébergement</h1>
            </div>';
 
 		$this->menu = '<div id="navbar" class="navbar-collapse collapse">
