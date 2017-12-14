@@ -3,7 +3,7 @@ require_once 'MyPDO.class.php';
 
 class Connexion {
 	private $PARAM_hote = '192.168.205.1'; // le chemin vers le serveur local (pour les tests) ou serveur de production (sur la ferme)
-	private $PARAM_utilisateur = 'PPE4'; // nom d'utilisateur pour se connecter
+	private $PARAM_utilisateur = 'starsup'; // nom d'utilisateur pour se connecter
 	private $PARAM_mot_passe = 'starsup'; // mot de passe de l'utilisateur pour se connecter
 	private $PARAM_nom_bd = 'starsup'; // nom de ma base de donnees
 

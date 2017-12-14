@@ -5,7 +5,8 @@ class pageBase {
 			'bootstrap.min',
 			'bootstrap-theme',
 			'bootstrap-theme.min',
-			'Normalize'
+			'Normalize',
+			'style'
 	); // mettre juste le nom du fichier SANS l'extension css
 	private $script = array (
 			'utile' //script gérant les affichages des messages d'erreur et aussi la redirection
@@ -15,32 +16,35 @@ class pageBase {
 	private $description;
 	private $titre;
 	private $entete;
-	protected $menu;
+
 	private $contenu;
 	private $zoneErreur;
 	private $piedpage;
 	public function __construct($t) {
 		$this->titre = $t;
-		$this->description = 'MARCHER pour une bonne action';
-		$this->motsCles = 'marche, trail, association, caritative, equipe, coureur';
+		$this->description = 'Notation d\'hébergements';
+		$this->motsCles = 'Note, hébergement, inspection';
 		$this->entete = '<div class="page-header">
-       <h1><a href="index.php"><img src="./Image/logo.png" alt="Logo de StarsUp"></a>   Stars\'Up, regardez la note de votre hébergement</h1>
+		<table>
+		<tr><td>
+       <h1><a href="index.php"><img class ="image" src="./Image/logo.png" alt="Logo de StarsUp"> </a></h1>
+			 </td>
+			 <td> <div id="navbar" class="navbar-collapse collapse">
+	 				<div class="navbar-header">
+
+	     			</div>
+
+	           <ul class="nav navbar-nav">
+						   <li> <a href="../VUE/VerifSessionOK.php">Connexion</a></li>
+	             <li><a href="inscriptionEquipeCoureurs.php">Liste des hébergements</a></li>
+	 			</ul>
+	 		</div></td>
            </div>';
 
-		$this->menu = '<div id="navbar" class="navbar-collapse collapse">
-				<div class="navbar-header">
-      				<a class="navbar-brand" href="../VUE/VerifSessionOK.php">Connexion</a>
-    			</div>
 
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.php">THT</a></li>
-            <li><a href="inscriptionEquipeCoureurs.php">s\'inscrire au trail </a></li>
-            <li><a href="consultationEquipescoureurs.php">Consultation des Equipes avec leurs coureurs</a></li>
-			</ul>
-		</div>';
 		$this->zoneErreur='';
 
-		$this->piedpage = '<div class="page-footer"><h6>copyright 1FO SIO 49 Chevrollier : 1fo.sio.49@gmail.com - technologies mises en oeuvre PHP objet - MVC - jquery - Ajax - Bootstrap</h6></div>';
+
 	}
 	public function __set($propriete, $valeur) {
 		switch ($propriete) {

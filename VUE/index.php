@@ -10,15 +10,8 @@ if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
 	$pageIndex = new pageBase ( "Bienvenue sur THT..." );
 }
 
-$pageIndex->contenu = '<section>
-		<article>
-			<img src="./Image/Trail4.jpg" alt="photos de 4 coureurs"> 
-		</article>	
-	</section>';
-				
+
 
 $pageIndex->afficher ();
 
 ?>
-
-
