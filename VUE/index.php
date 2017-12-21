@@ -5,9 +5,9 @@ require_once ('../Class/PageBase.class.php');
 require_once ('../Class/PageSecurisee.class.php');
 
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
-	$pageIndex = new pageSecurisee ( "Bienvenue sur Stars'Up" );
+	$pageIndex = new pageSecurisee ( "Bienvenue sur Stars'Up SECU" );
 } else {
-	$pageIndex = new pageBase ( "Bienvenue sur Stars'Up" );
+	$pageIndex = new pageBase ( "Bienvenue sur Stars'Up BASE" );
 }
 
 

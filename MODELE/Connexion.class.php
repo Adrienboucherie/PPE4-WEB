@@ -26,7 +26,7 @@ class ConnexionModele {
     public function getmdp($nom, $mdp) {
 
 	    if ($this->idCo) {
-	      $req ="SELECT mdp from equipe where nomequ='". $nom ."' and mdp ='". $mdp ."';" ;
+	      $req ="SELECT MDP from personne where MAIL='". $nom ."' and MDP ='". $mdp ."';" ;
 	      $resultEQU = $this->idCo->query($req);
 	      return $resultEQU->fetch()->mdp;
 	    }
@@ -35,7 +35,7 @@ class ConnexionModele {
     public function connect($nom, $mdp){
 
 	    if ($this->idCo) {
-		    $req ="SELECT * FROM equipe where nomequ='". $nom ."' and mdp ='". $mdp ."';" ;
+		    $req ="SELECT * FROM personne where MAiL='". $nom ."' and MDP ='". $mdp ."';" ;
 		    $resultEQU = $this->idCo->query($req);
 			return $resultEQU->fetch();
 	    }

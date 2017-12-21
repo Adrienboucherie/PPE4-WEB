@@ -27,10 +27,6 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 	if ((isset ( $_POST['idU'] )) && (isset ( $_POST['mdpU'] ))) {
 
 
-		/*$id=$_POST['idU'];
-		$idmdp=$_POST['mdpU'];*/
-
-
 		$info = $modeleCo->connect($_POST['idU'], $_POST['mdpU']);
 		if($info){
 			$lemail = $info->MAIL;
@@ -44,8 +40,6 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 			$_SESSION ['mdpU'] = $lemdp;
 			$_SESSION ['id'] = $id;
 
-				// on appelle la nouvelle classe Page_sécurisée :  page avec un menu specifique
-				$page = new PageSecurisee ( "Stars'Up - ModeAdmin" );
 				header ('Location:index.php');
 			}
 		else {
@@ -63,9 +57,10 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 		// action # car on reste sur la meme page
 		$page->contenu .= '	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
   					<div class="form-group">
-    					<input type="text" class="form-control" name="idU" id="idU"size="15" maxlength="15" placeholder="Identifiant" autofocus required >
-    					<input type="password" class="form-control" name="mdpU" id="mdpU" size="15" maxlength="15" placeholder="Mot de passe" required>
-  					</div>
+						<div class="col-md-4">
+    					<input type="text" class="form-control" name="idU" id="idU"size="15" maxlength="25" placeholder="Adresse Mail" autofocus required >
+    					<input type="password" class="form-control" name="mdpU" id="mdpU" size="15" maxlength="25" placeholder="Mot de passe" required>
+  					</div></div>
  					<button type="submit" class="btn btn-default">Valider</button>
 	 		 		<button type="reset" class="btn btn-default">Recommencer</button>
 			</form>';
