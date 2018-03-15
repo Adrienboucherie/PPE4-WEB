@@ -24,25 +24,50 @@ class pageBase {
 		$this->titre = $t;
 		$this->description = 'Notation d\'hébergements';
 		$this->motsCles = 'Note, hébergement, inspection';
-		$this->entete = '<div class="page-header">
+		$this->entete = '
+		<div class="page-header">
 		<table>
 		<tr><td>
        <h1><a href="index.php"><img class ="image" src="./Image/logo.png" alt="Logo de StarsUp"> </a></h1>
 			 </td>
 			 <td> <div id="navbar" class="navbar-collapse collapse">
-	 				<div class="navbar-header">
+	 				<div class="navbar-header ">
 
 	     			</div>
 
-	           <ul class="nav navbar-nav" >
+	           <ul class="nav navbar-nav">
 						   <li> <a href="../VUE/VerifSessionOK.php">Connexion</a></li>
-	             <li><a href="ConsultationHebergements.php">Liste des hébergements</a></li>
+	             <li><a href="inscriptionEquipeCoureurs.php">Liste des hébergements</a></li>
 	 			</ul>
 	 		</div></td></tr></table>
-           </div>';
+           </div>
+           
+       ';
+   
 
 
 		$this->zoneErreur='';
+
+				$this->contenu='
+				<div class="page-content">
+		
+
+           </div>';
+
+		$this->piedpage='
+		
+		
+
+
+
+
+
+
+
+
+		';
+
+		
 
 
 	}
