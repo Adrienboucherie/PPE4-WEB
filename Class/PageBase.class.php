@@ -37,7 +37,7 @@ class pageBase {
 
 	           <ul class="nav navbar-nav">
 						   <li> <a href="../VUE/VerifSessionOK.php">Connexion</a></li>
-	             <li><a href="inscriptionEquipeCoureurs.php">Liste des hébergements</a></li>
+	             <li><a href="ConsultationHebergements.php">Liste des hébergements</a></li>
 	 			</ul>
 	 		</div></td></tr></table>
            </div>
