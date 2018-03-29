@@ -40,4 +40,23 @@ class ConnexionModele {
 			return $resultEQU->fetch();
 	    }
     }
+
+    public function getIDCo($mail){
+
+	    if ($this->idCo) {
+		    $req ="SELECT id FROM personne where MAiL='". $mail."';" ;
+		    $resultEQU = $this->idCo->query($req);
+			return $resultEQU->fetch();
+	    }
+    }
+
+    public function getIDGerant($id){
+
+	    if ($this->idCo) {
+		    $req ="SELECT * FROM gerant where ID ='". $id ."';" ;
+		    $resultEQU = $this->idCo->query($req);
+			return $resultEQU->fetch();
+	    }
+    }
+
 }

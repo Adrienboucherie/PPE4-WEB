@@ -5,9 +5,9 @@ require_once ('../Class/PageBase.class.php');
 require_once ('../Class/PageSecurisee.class.php');
 
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
-	$pageIndex = new pageSecurisee ( "Bienvenue sur THT..." );
+	$pageIndex = new pageSecurisee ( "SECURISE" 	);
 } else {
-	$pageIndex = new pageBase ( "Bienvenue sur THT..." );
+	$pageIndex = new pageBase ( "PUBLIC" );
 }
 
 $pageIndex->contenu = 'oui'; 

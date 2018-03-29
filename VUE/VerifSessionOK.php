@@ -26,8 +26,20 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 	// traitement du formulaire (si on vient du formulaire alors
 	if ((isset ( $_POST['idU'] )) && (isset ( $_POST['mdpU'] ))) {
 
+		$IDConnexion = $modeleCo->getIDCo($_POST['idU']);
+		if($IDConnexion){
+			$IDgerant = $modeleCo->getIDGerant($IDConnexion);
+		}
+		else{
+			$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Vous n\'êtes pas un gérant
+			</div>';
+		}
+
+		if(isset($IDgerant) && !empty($IDgerant)){
 
 		$info = $modeleCo->connect($_POST['idU'], $_POST['mdpU']);
+
 		if($info){
 			$lemail = $info->MAIL;
 			$lemdp = $info->MDP;
@@ -43,17 +55,16 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 				header ('Location:index.php');
 			}
 		else {
-				// les identifiants de connexion existe mais ne sont pas VALABLES
-
-
-					header ('Location:verifSessionOK.php?error=ERREUR : Login ou mot de passe non valide !');
+				$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Mauvais login ou mot de passe
+			</div>';
 			}
-
+			}
 		}
-	//}
+	
 	 else { // pas de session donc on affiche le formulaire de connexion (on vient donc de la page base avec Se Connecter)
 
-		$page->contenu = "<h3>Veuillez vous connecter. </h3>";
+		$page->contenu .= "<h3>Veuillez vous connecter. </h3>";
 		// action # car on reste sur la meme page
 		$page->contenu .= '	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
   					<div class="form-group">
@@ -66,7 +77,7 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 			</form>';
 	}
 }
-// TRAITEMENT DE L'ERREUR
+/* TRAITEMENT DE L'ERREUR
 if (isset($_GET['error']) && !empty($_GET['error'])) {
 	$err = $_GET['error'];
 	$page->zoneErreur = '<div id="infoERREUR" class="alert alert-success fade in"><strong>INFO : </strong><a href="#" onclick="cacher();" class="close" data-dismiss="alert">&times;</a></div>';
@@ -79,7 +90,7 @@ if (isset($_GET['error']) && !empty($_GET['error'])) {
 	}
 	$page->scriptExec = "changerCouleurZoneErreur('".$class."');";	//ajout dans le tableau scriptExec du script à executer
 	$page->scriptExec = "montrer('".$err."');"; //ajout dans le tableau scriptExec du script à executer
-}
+}*/
 $page->afficher();
 
 
