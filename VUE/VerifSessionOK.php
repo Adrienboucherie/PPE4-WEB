@@ -29,22 +29,54 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 		$IDConnexion = $modeleCo->getIDCo($_POST['idU']);
 		if($IDConnexion){
 			$IDgerant = $modeleCo->getIDGerant($IDConnexion);
+			var_dump($IDgerant);
 		}
 		else{
 			$page->contenu .='<div class="alert alert-danger" role="alert">
- 			 Vous n\'êtes pas un gérant
+ 			 Mauvais login ou mot de passe
 			</div>';
 		}
 
-		if(isset($IDgerant) && !empty($IDgerant)){
+		if($IDgerant){
 
 		$info = $modeleCo->connect($_POST['idU'], $_POST['mdpU']);
-
-		if($info){
+		if(isset($info) && !empty($info)){
 			$lemail = $info->MAIL;
 			$lemdp = $info->MDP;
 			$id =  $info->ID;
 		}
+		else{
+			$page->contenu .='	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
+  					<div class="form-group">
+						<div class="col-md-4">
+    					<input type="text" class="form-control" name="idU" id="idU"size="15" maxlength="25" placeholder="Adresse Mail" autofocus required >
+    					<input type="password" class="form-control" name="mdpU" id="mdpU" size="15" maxlength="25" placeholder="Mot de passe" required>
+  					</div></div>
+ 					<button type="submit" class="btn btn-default">Valider</button>
+	 		 		<button type="reset" class="btn btn-default">Recommencer</button>
+			</form> ';
+			$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Mot de passe incorrect !
+			</div>';
+		}
+	}
+	else{
+				$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Vous n\'êtes pas gérant !
+			</div>';
+				$page->contenu .='	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
+  					<div class="form-group">
+						<div class="col-md-4">
+    					<input type="text" class="form-control" name="idU" id="idU"size="15" maxlength="25" placeholder="Adresse Mail" autofocus required >
+    					<input type="password" class="form-control" name="mdpU" id="mdpU" size="15" maxlength="25" placeholder="Mot de passe" required>
+  					</div></div>
+ 					<button type="submit" class="btn btn-default">Valider</button>
+	 		 		<button type="reset" class="btn btn-default">Recommencer</button>
+			</form>
+			';
+			}
+
+		
 
 		if(isset($id) & !empty($id))
 		{
@@ -54,12 +86,7 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 
 				header ('Location:index.php');
 			}
-		else {
-				$page->contenu .='<div class="alert alert-danger" role="alert">
- 			 Mauvais login ou mot de passe
-			</div>';
-			}
-			}
+			
 		}
 	
 	 else { // pas de session donc on affiche le formulaire de connexion (on vient donc de la page base avec Se Connecter)

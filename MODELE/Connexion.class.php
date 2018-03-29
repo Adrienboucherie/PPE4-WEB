@@ -53,7 +53,7 @@ class ConnexionModele {
     public function getIDGerant($id){
 
 	    if ($this->idCo) {
-		    $req ="SELECT * FROM gerant where ID ='". $id ."';" ;
+		    $req ="SELECT * FROM gerant where ID ='". $id->id ."';" ;
 		    $resultEQU = $this->idCo->query($req);
 			return $resultEQU->fetch();
 	    }
