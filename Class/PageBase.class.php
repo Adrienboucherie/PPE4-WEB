@@ -1,5 +1,5 @@
 <?php
-class pageBase {
+class PageBase {
 	private $style = array (
 			'bootstrap',
 			'bootstrap.min',
@@ -16,7 +16,7 @@ class pageBase {
 	private $description;
 	private $titre;
 	private $entete;
-
+	protected $menu;
 	private $contenu;
 	private $zoneErreur;
 	private $piedpage;
@@ -24,7 +24,7 @@ class pageBase {
 		$this->titre = $t;
 		$this->description = 'Notation d\'hébergements';
 		$this->motsCles = 'Note, hébergement, inspection';
-		$this->entete = '
+		$this->menu = '
 		<div class="page-header">
 		<table>
 		<tr><td>

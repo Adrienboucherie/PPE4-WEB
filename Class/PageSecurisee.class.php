@@ -1,5 +1,5 @@
 <?php
-class pageSecurisee extends pageBase {
+class PageSecurisee extends PageBase {
 	public function __construct($t) {
 		parent::__construct($t);
 	}
@@ -13,22 +13,22 @@ class pageSecurisee extends pageBase {
 		// on rajoute dans le MENU 
 		// le menu Déconnexion : possiblité de se deconnecter du mode administrateur
 		// 2 nouvelles pages "inscription coureurs et Association Caritative !
-		$this->menu ='<div id="navbar" class="navbar navbar-inverse">
-				<div class="navbar-header">
-      				<a class="navbar-brand" href="../VUE/VerifSessionOK.php">Déconnexion</a>
-    			</div>
-    
-          <ul class="nav navbar-nav">
-            <li><a href="index.php">THT</a></li>
-            <li><a href="inscriptionEquipeCoureurs.php">s\'inscrire au trail </a></li>
-            <li><a href="consultationEquipescoureurs.php">Consultation des Equipes avec leurs coureurs</a></li>
-		
-			<li><a href="inscriptionCoureurs.php">ajouter les coureurs dans une équipe</a></li>
-		    <li><a href="ajoutAssociation.php">ajouter l\'association caritative</a></li>
-		    <li><a href="ajoutSponsor.php">Ajout un sponsor</a></li>
-				
-			</ul>
-		</div>';
+		$this->menu ='<div class="page-header">
+		<table>
+		<tr><td>
+       <h1><a href="index.php"><img class ="image" src="./Image/logo.png" alt="Logo de StarsUp"> </a></h1>
+			 </td>
+			 <td> <div id="navbar" class="navbar-collapse collapse">
+	 				<div class="navbar-header ">
+
+	     			</div>
+
+	           <ul class="nav navbar-nav">
+						   <li> <a href="../VUE/VerifSessionOK.php">Déconnexion</a></li>
+	             <li><a href="ConsultationHebergements.php">Liste des hébergements</a></li>
+	 			</ul>
+	 		</div></td></tr></table>
+           </div>';
 		echo $this->menu;
 	}
 }

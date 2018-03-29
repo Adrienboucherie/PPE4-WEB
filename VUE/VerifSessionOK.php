@@ -17,10 +17,11 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 	}
 	// on detruit la session sur le serveur
 	session_destroy ();
-	?> <script type="text/javascript"> alert('session detruite');</script> <?php
 
 	// affichage du msg
-	header ('Location:verifSessionOK.php?error=SUCCESS : Vous venez d\'être déconnecté !');
+	$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Vous vous êtes déconnecté
+			</div>';
 
 } else {
 	// traitement du formulaire (si on vient du formulaire alors

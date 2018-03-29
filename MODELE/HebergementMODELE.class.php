@@ -16,7 +16,7 @@ class HebergementMODELE {
 	}
 	public function ListeHebergements(){
 		if ($this->idcASS) {
-			$req ="select nom_heb, adresse_heb, ville_heb, nbetoile, commentaire from hebergement as h inner join visite as v on h.id_heb = v.id_heb GROUP BY nom_heb order by nom_heb ASC";
+			$req ="select nom_heb, adresse_heb, ville_heb, nbetoile, commentaire from hebergement as h inner join visite as v on h.id_heb = v.id_heb  GROUP BY nom_heb HAVING nbetoile >0  order by nom_heb ASC ;";
 			$resultASS = $this->idcASS->query($req);
 			return $resultASS;
 		}
