@@ -26,6 +26,7 @@ foreach ($listeheb as $unHeb){
 					$pageConsultationHebergements->contenu .= '<tr><td>'.$unHeb->nom_heb.'</td><td>'.$unHeb->adresse_heb.'</td>
 					<td>'.$unHeb->ville_heb.'</td><td><div class="row"><div class="col-md-1">'.$unHeb->nbetoile.'</div><div class="col-md-1"><img class ="image" id="etoile" src="./Image/etoile.png" alt="Appréciation"></div></div></td><td>'.$unHeb->description_heb.'</td></tr>';
 				}
-				$pageConsultationHebergements->contenu .= '</tbody></thead></table></div>';
+				$pageConsultationHebergements->contenu .= '</tbody></thead></table></div>
+				';
 $pageConsultationHebergements->afficher();
 ?>

@@ -30,6 +30,7 @@ foreach ($listeheb as $unHeb){
                   <div class="d-flex justify-content-between align-items-center">
                     Adresse: '.$unHeb->adresse_heb.', '.$unHeb->ville_heb.'
                     </div>
+
                     <small class="text-muted">';
                     switch($unHeb->nbetoile){
                     	case "1" :
@@ -49,6 +50,32 @@ foreach ($listeheb as $unHeb){
                     break;
                     }
                     	$pageConsultationHebergements->contenu .='</small>
+                        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Avis
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Avis des inspecteurs</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
                   </div>
                 </div>
               </div>

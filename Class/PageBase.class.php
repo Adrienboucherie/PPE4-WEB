@@ -9,7 +9,8 @@ class PageBase {
 			'style'
 	); // mettre juste le nom du fichier SANS l'extension css
 	private $script = array (
-			'utile' //script gérant les affichages des messages d'erreur et aussi la redirection
+			'utile',
+			 //script gérant les affichages des messages d'erreur et aussi la redirection
 	); // mettre juste le nom du fichier SANS l'extension js
 	private $scriptExec = array(); //script que l'on veut executer
 	private $motsCles;

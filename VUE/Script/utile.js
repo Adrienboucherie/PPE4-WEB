@@ -48,3 +48,4 @@ function creerCookie(nom, valeur, jours) {
 	else var expire = "";
 	document.cookie = nom+"="+valeur+expire+"; path=/";
 	}
+
