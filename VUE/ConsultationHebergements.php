@@ -15,18 +15,53 @@ if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
 $pageConsultationHebergements->script = 'jquery-3.0.0.min';
 //$pageConsultationHebergements->script = 'ajaxRecupHebergements'; //pour gerer par l'AJAX le clic de la case � cocher et afficher les commentaires correspondants
 
-$pageConsultationHebergements->contenu = '<section>
-					<div class="col-md-6">
-          <table class="table table-striped" width=100%>
-            <thead>	<tr><th width=25%>Nom de l\'hébergement</th><th width=15%>Adresse</th><th width=15%>Ville</th><th width=5%>Note</th><th width=35%>Description de l\'hébergement</th></tr></thead><tbody>';
+$pageConsultationHebergements->contenu .= '<div class="row">';
+				
 //parcours du résultat de la requete
 $listeheb=listeHebergements();
 
 foreach ($listeheb as $unHeb){
-					$pageConsultationHebergements->contenu .= '<tr><td>'.$unHeb->nom_heb.'</td><td>'.$unHeb->adresse_heb.'</td>
-					<td>'.$unHeb->ville_heb.'</td><td><div class="row"><div class="col-md-1">'.$unHeb->nbetoile.'</div><div class="col-md-1"><img class ="image" id="etoile" src="./Image/etoile.png" alt="Appréciation"></div></div></td><td>'.$unHeb->description_heb.'</td></tr>';
+							$pageConsultationHebergements->contenu .= '<div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="../VUE/Image/'.$unHeb->image_heb.'">
+                <div class="card-body">
+                <label>'.$unHeb->nom_heb.'</label>
+                  <p class="card-text">'.$unHeb->description_heb.'</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    Adresse: '.$unHeb->adresse_heb.', '.$unHeb->ville_heb.'
+                    </div>
+                    <small class="text-muted">';
+                    switch($unHeb->nbetoile){
+                    	case "1" :
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
+                    break;
+                    	case "2":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "3":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "4":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "5":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
+                    break;
+                    }
+                    	$pageConsultationHebergements->contenu .='</small>
+                  </div>
+                </div>
+              </div>
+           ';
+
+
+
+
+
+
+					/*$pageConsultationHebergements->contenu .= '<tr><td>'.$unHeb->nom_heb.'</td><td>'.$unHeb->adresse_heb.'</td>
+					<td>'.$unHeb->ville_heb.'</td><td><div class="row"><div class="col-md-1">'.$unHeb->nbetoile.'</div><div class="col-md-1"><img class ="image" id="etoile" src="./Image/etoile.png" alt="Appréciation"></div></div></td><td>'.$unHeb->description_heb.'</td></tr>';*/
 				}
-				$pageConsultationHebergements->contenu .= '</tbody></thead></table></div>
-				';
+				$pageConsultationHebergements->contenu .= '</div>';
 $pageConsultationHebergements->afficher();
 ?>

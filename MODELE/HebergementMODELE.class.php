@@ -22,9 +22,9 @@ class HebergementMODELE {
 		}
 	}
 
-	public function ListeHebergements(){
+	public function ListeAvis($id_heb){
 		if ($this->idcASS) {
-			$req ="select  ;";
+			$req ="select date_visite, nbetoile, commentaire from visite where id_heb = '".$id_heb."' ;";
 			$resultASS = $this->idcASS->query($req);
 			return $resultASS;
 		}

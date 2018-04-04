@@ -4,6 +4,7 @@ session_start();
 require_once ('../Class/PageBase.class.php');
 require_once ('../Class/PageSecurisee.class.php');
 require_once ('../CONTROLEUR/affichage_hebergements.php');
+require_once ('../MODELE/HebergementMODELE.class.php');
 
 
 if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
@@ -68,10 +69,34 @@ foreach ($listeheb as $unHeb){
         </button>
       </div>
       <div class="modal-body">
-        ...
+      <table border=1px>
+      	';
+      	$listeAvis=listeAvis($unHeb->id_heb);
+      	foreach($listeAvis as $unAvis){
+      		$pageConsultationHebergements->contenu .= '<tr><td>'.$unAvis->date_visite.'</td><td>';
+      		 switch($unAvis->nbetoile){
+                    	case "1" :
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
+                    break;
+                    	case "2":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "3":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "4":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
+                    break;
+                    	case "5":
+                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
+                    break;
+                    }
+      			 $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
+      	}
+      	$pageConsultationHebergements->contenu .='</table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
       </div>
     </div>
   </div>

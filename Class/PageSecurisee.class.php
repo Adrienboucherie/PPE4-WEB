@@ -25,7 +25,6 @@ class PageSecurisee extends PageBase {
 
 	           <ul class="nav navbar-nav">
 						   <li> <a href="../VUE/VerifSessionOK.php">Déconnexion</a></li>
-	             <li><a href="ConsultationHebergements.php">Liste des hébergements</a></li>
 	             <li><a href="ConsultationHebergements2.php">Liste des hébergements</a></li>
 	 			</ul>
 	 		</div></td></tr></table>
