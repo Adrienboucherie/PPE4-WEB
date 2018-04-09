@@ -20,7 +20,6 @@ $pageConsultationHebergements->contenu .= '<div class="row">';
 				
 //parcours du résultat de la requete
 $listeheb=listeHebergements();
-
 foreach ($listeheb as $unHeb){
 							$pageConsultationHebergements->contenu .= '<div class="col-md-4">
               <div class="card mb-4 box-shadow">
@@ -31,9 +30,57 @@ foreach ($listeheb as $unHeb){
                   <div class="d-flex justify-content-between align-items-center">
                     Adresse: '.$unHeb->adresse_heb.', '.$unHeb->ville_heb.'
                     </div>
-
-                    <small class="text-muted">';
-                    switch($unHeb->nbetoile){
+                    <small class="text-muted">
+                    
+                    <div class="modal fade" id="exampleModal'.$unHeb->id_heb.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Avis des inspecteurs</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                        <table border=1px>
+                          ';
+                          $listeAvis=listeAvis($unHeb->id_heb);
+                          $moyenne = 0;
+                          $nb = 0;
+                          foreach($listeAvis as $unAvis){
+                            $nb++;
+                            $moyenne += $unAvis->nbetoile;
+                            $pageConsultationHebergements->contenu .= '<tr><td>'.$unAvis->date_visite.'</td><td>';
+                             switch($unAvis->nbetoile){
+                                        case "1" :
+                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
+                                      break;
+                                        case "2":
+                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
+                                      break;
+                                        case "3":
+                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
+                                      break;
+                                        case "4":
+                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
+                                      break;
+                                        case "5":
+                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
+                                      break;
+                                      }
+                               $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
+                          }
+                          $pageConsultationHebergements->contenu .='</table>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    
+                    ';
+                    switch(round($moyenne/$nb)){
                     	case "1" :
                     $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
                     break;
@@ -54,53 +101,12 @@ foreach ($listeheb as $unHeb){
                         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
                         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal'.$unHeb->id_heb.'">
   Avis
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Avis des inspecteurs</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <table border=1px>
-      	';
-      	$listeAvis=listeAvis($unHeb->id_heb);
-      	foreach($listeAvis as $unAvis){
-      		$pageConsultationHebergements->contenu .= '<tr><td>'.$unAvis->date_visite.'</td><td>';
-      		 switch($unAvis->nbetoile){
-                    	case "1" :
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
-                    break;
-                    	case "2":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "3":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "4":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "5":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
-                    break;
-                    }
-      			 $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
-      	}
-      	$pageConsultationHebergements->contenu .='</table>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-      </div>
-    </div>
-  </div>
-</div>
+
                   </div>
                 </div>
               </div>
