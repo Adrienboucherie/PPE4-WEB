@@ -7,7 +7,7 @@ $page= new PageBase ( "Stars'Up - Se connecter" );
 $modeleCo=new ConnexionModele();
 
 /* cas ou la session existe deja, donc il a clique sur se Deconnecter */
-if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
+if (isset($_SESSION['idUGerant']) && isset($_SESSION['mdpUGerant']) || isset($_SESSION['idUAdmin']) && isset($_SESSION['mdpUAdmin'])) {
 	/* Dans ce cas, on detruit la session SUR LE SERVEUR */
 	$_SESSION = array (); /* on vide le contenu de session sur le serveur */
 	// Dans ce cas, on detruit aussi l'identifiant de SESSION en recreant le cookie de SESSION avec une dateHeure perimee (time() -42000)
@@ -30,8 +30,8 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 		$IDConnexion = $modeleCo->getIDCo($_POST['idU']);
 		if($IDConnexion){
 			$IDgerant = $modeleCo->getIDGerant($IDConnexion);
-			var_dump($IDgerant);
-		}
+			$IDadmin = $modeleCo->getIDAdmin($IDConnexion);
+			}
 		else{
 			$page->contenu .='<div class="alert alert-danger" role="alert">
  			 Mauvais login ou mot de passe
@@ -39,13 +39,39 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 		}
 
 		if($IDgerant){
-
+			
 		$info = $modeleCo->connect($_POST['idU'], $_POST['mdpU']);
+		var_dump($info);
 		if(isset($info) && !empty($info)){
-			$lemail = $info->MAIL;
-			$lemdp = $info->MDP;
-			$id =  $info->ID;
+			$lemailGerant = $info->MAIL;
+			$lemdpGerant = $info->MDP;
+			$idGerant =  $info->ID;
 		}
+		
+		else{
+			$page->contenu .='	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
+  					<div class="form-group">
+						<div class="col-md-4">
+    					<input type="text" class="form-control" name="idU" id="idU"size="15" maxlength="25" placeholder="Adresse Mail" autofocus required >
+    					<input type="password" class="form-control" name="mdpU" id="mdpU" size="15" maxlength="25" placeholder="Mot de passe" required>
+  					</div></div>
+ 					<button type="submit" class="btn btn-default">Valider</button>
+	 		 		<button type="reset" class="btn btn-default">Recommencer</button>
+			</form> ';
+			$page->contenu .='<div class="alert alert-danger" role="alert">
+ 			 Mot de passe incorrect !
+			</div>';
+		}
+	}
+	elseif($IDadmin){
+		$infoAdmin = $modeleCo->connect($_POST['idU'], $_POST['mdpU']);
+		var_dump($infoAdmin);
+		if(isset($infoAdmin) && !empty($infoAdmin)){
+			$lemailAdmin = $infoAdmin->MAIL;
+			$lemdpAdmin = $infoAdmin->MDP;
+			$idAdmin =  $infoAdmin->ID;
+		}
+		
 		else{
 			$page->contenu .='	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
   					<div class="form-group">
@@ -63,7 +89,7 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 	}
 	else{
 				$page->contenu .='<div class="alert alert-danger" role="alert">
- 			 Vous n\'êtes pas gérant !
+ 			 Vous n\'êtes pas un administrateur !
 			</div>';
 				$page->contenu .='	<form class="form-inline" id="formInscriptionAdmin" method="POST" action="VerifSessionOK.php">
   					<div class="form-group">
@@ -79,15 +105,22 @@ if (isset($_SESSION ['idU']) && isset($_SESSION ['mdpU'])) {
 
 		
 
-		if(isset($id) & !empty($id))
+		if(isset($idGerant) && !empty($idGerant))
 		{
-			$_SESSION ['idU'] = $lemail;
-			$_SESSION ['mdpU'] = $lemdp;
-			$_SESSION ['id'] = $id;
-
+			$_SESSION['idUGerant'] = $lemailGerant;
+			$_SESSION['mdpUGerant'] = $lemdpGerant;
+			$_SESSION['idGerant'] = $idGerant;
+			var_dump($_SESSION['idUGerant']);
 				header ('Location:index.php');
 			}
-			
+			elseif(isset($idAdmin) && !empty($idAdmin)){
+			$_SESSION['idUAdmin'] = $lemailAdmin;
+			$_SESSION['mdpUAdmin'] = $lemdpAdmin;
+			$_SESSION['idAdmin'] = $idAdmin;
+			var_dump($_SESSION['idUAdmin']);
+				header ('Location:index.php');
+			}
+		
 		}
 	
 	 else { // pas de session donc on affiche le formulaire de connexion (on vient donc de la page base avec Se Connecter)
