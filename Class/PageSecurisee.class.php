@@ -3,6 +3,14 @@ class PageSecurisee extends PageBase {
 	public function __construct($t) {
 		parent::__construct($t);
 	}
+	private $style = array (
+			'bootstrap',
+			'bootstrap.min',
+			'bootstrap-theme',
+			'bootstrap-theme.min',
+			'Normalize',
+			'style'
+	);
 	
 	/**
 	 ***************************** Gestion du menu ********************************************

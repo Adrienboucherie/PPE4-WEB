@@ -7,11 +7,11 @@ require_once ('../CONTROLEUR/affichage_hebergements.php');
 require_once ('../MODELE/HebergementMODELE.class.php');
 
 
-if (isset ( $_SESSION ['idU'] ) && isset ( $_SESSION ['mdpU'] )) {
+if (isset($_SESSION['idU']) && isset ($_SESSION['mdpU']) || isset($_SESSION['idUGerant']) && isset ($_SESSION['mdpUGerant']) || isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])) {
 	$isSession = true;
-	$pageConsultationHebergements = new pageSecurisee ("Consulter les hébergements");
+	$pageConsultationHebergements = new pageSecurisee("Consulter les hébergements");
 } else {
-	$pageConsultationHebergements = new pageBase ("Consulter les Hébergements");
+	$pageConsultationHebergements = new pageBase("Consulter les Hébergements");
 }
 $pageConsultationHebergements->script = 'jquery-3.0.0.min';
 //$pageConsultationHebergements->script = 'ajaxRecupHebergements'; //pour gerer par l'AJAX le clic de la case � cocher et afficher les commentaires correspondants
@@ -71,8 +71,30 @@ foreach ($listeheb as $unHeb){
                                $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
                           }
                           $pageConsultationHebergements->contenu .='</table>
-                        </div>
-                        <div class="modal-footer">
+                        </div>';
+                        if(isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])){
+                          $pageConsultationHebergements->contenu .=' 
+                          <form action="../CONTROLEUR/AjouterVisite.php" method="get">
+                           <label for="sel1">Veuillez sélectionner un nombre d\'étoile:</label>
+                            <select class="form-control" id="sel1" require>
+                              <option>0</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                            </select>
+                              <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Example textarea</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" minlenght="100" require></textarea>
+                              </div>
+                              <input type="submit"></input>
+                            </form>
+                            ';
+                        }
+                        
+
+                        $pageConsultationHebergements->contenu .='<div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         </div>
                       </div>
@@ -97,6 +119,7 @@ foreach ($listeheb as $unHeb){
                     $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
                     break;
                     }
+
                     	$pageConsultationHebergements->contenu .='</small>
                         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
