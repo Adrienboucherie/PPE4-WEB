@@ -8,20 +8,20 @@ require_once ('../MODELE/HebergementMODELE.class.php');
 
 
 if (isset($_SESSION['idU']) && isset ($_SESSION['mdpU']) || isset($_SESSION['idUGerant']) && isset ($_SESSION['mdpUGerant']) || isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])) {
-	$isSession = true;
-	$pageConsultationHebergements = new pageSecurisee("Consulter les hébergements");
+    $isSession = true;
+    $pageConsultationHebergements = new pageSecurisee("Consulter les hébergements");
 } else {
-	$pageConsultationHebergements = new pageBase("Consulter les Hébergements");
+    $pageConsultationHebergements = new pageBase("Consulter les Hébergements");
 }
 $pageConsultationHebergements->script = 'jquery-3.0.0.min';
 //$pageConsultationHebergements->script = 'ajaxRecupHebergements'; //pour gerer par l'AJAX le clic de la case � cocher et afficher les commentaires correspondants
 
 $pageConsultationHebergements->contenu .= '<div class="row">';
-				
+
 //parcours du résultat de la requete
 $listeheb=listeHebergements();
 foreach ($listeheb as $unHeb){
-							$pageConsultationHebergements->contenu .= '<div class="col-md-4">
+    $pageConsultationHebergements->contenu .= '<div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="../VUE/Image/'.$unHeb->image_heb.'">
                 <div class="card-body">
@@ -44,36 +44,36 @@ foreach ($listeheb as $unHeb){
                         <div class="modal-body">
                         <table border=1px>
                           ';
-                          $listeAvis=listeAvis($unHeb->id_heb);
-                          $moyenne = 0;
-                          $nb = 0;
-                          foreach($listeAvis as $unAvis){
-                            $nb++;
-                            $moyenne += $unAvis->nbetoile;
-                            $pageConsultationHebergements->contenu .= '<tr><td>'.$unAvis->date_visite.'</td><td>';
-                             switch($unAvis->nbetoile){
-                                        case "1" :
-                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
-                                      break;
-                                        case "2":
-                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
-                                      break;
-                                        case "3":
-                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
-                                      break;
-                                        case "4":
-                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
-                                      break;
-                                        case "5":
-                                      $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
-                                      break;
-                                      }
-                               $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
-                          }
-                          $pageConsultationHebergements->contenu .='</table>
+    $listeAvis=listeAvis($unHeb->id_heb);
+    $moyenne = 0;
+    $nb = 0;
+    foreach($listeAvis as $unAvis){
+        $nb++;
+        $moyenne += $unAvis->nbetoile;
+        $pageConsultationHebergements->contenu .= '<tr><td>'.$unAvis->date_visite.'</td><td>';
+        switch($unAvis->nbetoile){
+            case "1" :
+                $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
+                break;
+            case "2":
+                $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
+                break;
+            case "3":
+                $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
+                break;
+            case "4":
+                $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
+                break;
+            case "5":
+                $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
+                break;
+        }
+        $pageConsultationHebergements->contenu .='</td><td>'.$unAvis->commentaire.'</td></tr>';
+    }
+    $pageConsultationHebergements->contenu .='</table>
                         </div>';
-                        if(isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])){
-                          $pageConsultationHebergements->contenu .=' 
+    if(isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])){
+        $pageConsultationHebergements->contenu .=' 
                           <form action="../CONTROLEUR/AjouterVisite.php" method="get">
                            <label for="sel1">Veuillez sélectionner un nombre d\'étoile:</label>
                             <select class="form-control" id="sel1" require>
@@ -91,10 +91,10 @@ foreach ($listeheb as $unHeb){
                               <input type="submit"></input>
                             </form>
                             ';
-                        }
-                        
+    }
 
-                        $pageConsultationHebergements->contenu .='<div class="modal-footer">
+
+    $pageConsultationHebergements->contenu .='<div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
                         </div>
                       </div>
@@ -102,25 +102,25 @@ foreach ($listeheb as $unHeb){
                   </div>
                     
                     ';
-                    switch(round($moyenne/$nb)){
-                    	case "1" :
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
-                    break;
-                    	case "2":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "3":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "4":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
-                    break;
-                    	case "5":
-                    $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
-                    break;
-                    }
+    switch(round($moyenne/$nb)){
+        case "1" :
+            $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/1etoile.png" alt="Appréciation">';
+            break;
+        case "2":
+            $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/2etoiles.png" alt="Appréciation">';
+            break;
+        case "3":
+            $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/3etoiles.png" alt="Appréciation">';
+            break;
+        case "4":
+            $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/4etoiles.png" alt="Appréciation">';
+            break;
+        case "5":
+            $pageConsultationHebergements->contenu .='<img class ="image" id="etoile" src="./Image/etoiles/5etoiles.png" alt="Appréciation">';
+            break;
+    }
 
-                    	$pageConsultationHebergements->contenu .='</small>
+    $pageConsultationHebergements->contenu .='</small>
                         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
                         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -140,9 +140,9 @@ foreach ($listeheb as $unHeb){
 
 
 
-					/*$pageConsultationHebergements->contenu .= '<tr><td>'.$unHeb->nom_heb.'</td><td>'.$unHeb->adresse_heb.'</td>
-					<td>'.$unHeb->ville_heb.'</td><td><div class="row"><div class="col-md-1">'.$unHeb->nbetoile.'</div><div class="col-md-1"><img class ="image" id="etoile" src="./Image/etoile.png" alt="Appréciation"></div></div></td><td>'.$unHeb->description_heb.'</td></tr>';*/
-				}
-				$pageConsultationHebergements->contenu .= '</div>';
+    /*$pageConsultationHebergements->contenu .= '<tr><td>'.$unHeb->nom_heb.'</td><td>'.$unHeb->adresse_heb.'</td>
+    <td>'.$unHeb->ville_heb.'</td><td><div class="row"><div class="col-md-1">'.$unHeb->nbetoile.'</div><div class="col-md-1"><img class ="image" id="etoile" src="./Image/etoile.png" alt="Appréciation"></div></div></td><td>'.$unHeb->description_heb.'</td></tr>';*/
+}
+$pageConsultationHebergements->contenu .= '</div>';
 $pageConsultationHebergements->afficher();
 ?>
