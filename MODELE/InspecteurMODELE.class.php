@@ -23,4 +23,14 @@ class InspecteurMODELE {
 		}
 	}
 
+	public function insertionInspecteurs($id_heb, $id_insp, $dateV){
+		if ($this->idcASS) {
+			$req ="INSERT INTO visite (ID, ID_HEB, DATE_VISITE) VALUES ('".$id_insp."', '".$id_heb."', '".$dateV."')";
+			$resultASS = $this->idcASS->query($req);
+			return $resultASS;
+		}
+	}
+
+
+
 }
