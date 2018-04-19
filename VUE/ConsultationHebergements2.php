@@ -3,14 +3,18 @@ session_start();
 
 require_once ('../Class/PageBase.class.php');
 require_once ('../Class/PageSecurisee.class.php');
+require_once ('../Class/PageAdmin.class.php');
 require_once ('../CONTROLEUR/affichage_hebergements.php');
 require_once ('../MODELE/HebergementMODELE.class.php');
 
 
-if (isset($_SESSION['idU']) && isset ($_SESSION['mdpU']) || isset($_SESSION['idUGerant']) && isset ($_SESSION['mdpUGerant']) || isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])) {
+if (isset($_SESSION['idU']) && isset ($_SESSION['mdpU']) || isset($_SESSION['idUGerant']) && isset ($_SESSION['mdpUGerant'])) {
     $isSession = true;
     $pageConsultationHebergements = new pageSecurisee("Consulter les hébergements");
-} else {
+} else if(isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])){
+  $pageConsultationHebergements= new pageAdmin("oui");
+}
+else{
     $pageConsultationHebergements = new pageBase("Consulter les Hébergements");
 }
 $pageConsultationHebergements->script = 'jquery-3.0.0.min';

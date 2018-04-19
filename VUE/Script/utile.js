@@ -48,4 +48,8 @@ function creerCookie(nom, valeur, jours) {
 	else var expire = "";
 	document.cookie = nom+"="+valeur+expire+"; path=/";
 	}
-
+function oui{
+$(".form_datetime").datetimepicker({
+        format: "dd MM yyyy - hh:ii"
+    });
+}
