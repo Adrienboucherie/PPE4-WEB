@@ -8,6 +8,7 @@ require_once ('../CONTROLEUR/affichage_hebergements.php');
 require_once ('../MODELE/HebergementMODELE.class.php');
 
 
+
 if (isset($_SESSION['idU']) && isset ($_SESSION['mdpU']) || isset($_SESSION['idUGerant']) && isset ($_SESSION['mdpUGerant'])) {
     $isSession = true;
     $pageConsultationHebergements = new pageSecurisee("Consulter les hébergements");
@@ -25,6 +26,8 @@ $pageConsultationHebergements->contenu .= '<div class="row">';
 //parcours du résultat de la requete
 $listeheb=listeHebergements();
 foreach ($listeheb as $unHeb){
+    $_SESSION['ID_HEB']= $unHeb->id_heb;
+    
     $pageConsultationHebergements->contenu .= '<div class="col-md-4">
               <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="../VUE/Image/'.$unHeb->image_heb.'">
@@ -40,7 +43,8 @@ foreach ($listeheb as $unHeb){
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Avis des inspecteurs</h5>
+                          <h5 class="modal-title">Avis des inspecteurs - '.$unHeb->nom_heb.'</h5>
+                          <p id="id_hebergement">Hebergement n° '.$unHeb->id_heb.'
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -78,19 +82,19 @@ foreach ($listeheb as $unHeb){
                         </div>';
     if(isset($_SESSION['idUAdmin']) && isset ($_SESSION['mdpUAdmin'])){
         $pageConsultationHebergements->contenu .=' 
-                          <form action="../CONTROLEUR/AjouterVisite.php" method="get">
-                           <label for="sel1">Veuillez sélectionner un nombre d\'étoile:</label>
-                            <select class="form-control" id="sel1" require>
-                              <option>0</option>
-                              <option>1</option>
-                              <option>2</option>
-                              <option>3</option>
-                              <option>4</option>
-                              <option>5</option>
+        <form action="../CONTROLEUR/insertionEtoile.php" method="POST">
+                           <label >Veuillez sélectionner un nombre d\'étoile:</label>
+                            <select class="form-control" id="diminutionEtoile" name="diminutionEtoile" require>
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <optionvalue="3">3</option>
+                              <option value="4">4</option>
+                              <option value="5">5</option>
                             </select>
                               <div class="form-group">
-                                <label for="exampleFormControlTextarea1">Example textarea</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" minlenght="100" require></textarea>
+                                <label ">Example textarea</label>
+                                <textarea class="form-control" id="DescriptionEtoile" name="DescriptionEtoile" minlenght="100" require></textarea>
                               </div>
                               <input type="submit"></input>
                             </form>
