@@ -21,13 +21,6 @@ class HebergementMODELE {
 			return $resultASS;
 		}
 	}
-	public function ListeHebergementsALL(){
-		if ($this->idcASS) {
-			$req ="select nom_heb, id_heb from hebergement;";
-			$resultASS = $this->idcASS->query($req);
-			return $resultASS;
-		}
-	}
 
 	public function ListeAvis($id_heb){
 		if ($this->idcASS) {

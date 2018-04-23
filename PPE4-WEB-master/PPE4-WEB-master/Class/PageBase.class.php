@@ -41,8 +41,7 @@ class PageBase {
 	             <li><a href="ConsultationHebergements.php">Liste des hébergements</a></li>
 	 			</ul>
 	 		</div></td></tr></table>
-		   </div>
-		  
+           </div>
            
        ';
    

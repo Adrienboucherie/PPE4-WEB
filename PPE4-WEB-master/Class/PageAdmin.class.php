@@ -1,16 +1,16 @@
 <?php
-class PageSecurisee extends PageBase {
+class PageAdmin extends PageBase {
 	public function __construct($t) {
 		parent::__construct($t);
 	}
-	private $style = array (
-			'bootstrap',
-			'bootstrap.min',
-			'bootstrap-theme',
-			'bootstrap-theme.min',
-			'Normalize',
-			'style'
-	);
+    private $style = array (
+        'bootstrap',
+        'bootstrap.min',
+        'bootstrap-theme',
+        'bootstrap-theme.min',
+        'Normalize',
+        'style'
+    );
 	
 	/**
 	 ***************************** Gestion du menu ********************************************
@@ -34,6 +34,8 @@ class PageSecurisee extends PageBase {
 	           <ul class="nav navbar-nav">
 						   <li> <a href="../VUE/VerifSessionOK.php">Déconnexion</a></li>
 	             <li><a href="ConsultationHebergements2.php">Liste des hébergements</a></li>
+	             <li><a href="../VUE/visite.php">Visite</a></li>
+	             
 	 			</ul>
 	 		</div></td></tr></table>
            </div>';

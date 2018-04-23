@@ -57,15 +57,6 @@ class ConnexionModele {
 		    $resultEQU = $this->idCo->query($req);
 			return $resultEQU->fetch();
 	    }
-	}
-	
-	public function getIDAdmin($id){
-		if ($this->idCo) {
-		    $req ="SELECT * FROM admin where ID ='". $id->id ."';" ;
-		    $resultEQU = $this->idCo->query($req);
-			return $resultEQU->fetch();
-	    }
-
-	}
+    }
 
 }
